@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pressure Wash Pros | Keller & Colleyville, TX</title>
+    <title>Pressure Wash Pros | Keller & Colleyville's Trusted Cleaning Experts</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CSS Variables --- */
+        /* --- CSS Variables & Design System --- */
         :root {
-            --primary-color: #0ea5e9; /* Bright Water Blue */
-            --primary-hover: #0284c7;
-            --secondary-color: #f0f9ff;
-            --dark-bg: #0f172a;
+            --primary-blue: #0ea5e9; /* Bright, clean blue */
+            --dark-blue: #0f172a; /* Deep navy */
+            --white: #ffffff;
+            --light-gray: #f8fafc;
             --text-dark: #334155;
-            --text-light: #f8fafc;
+            --accent-cyan: #22d3ee; /* Bright accent for hover/CTA */
+            --transition: all 0.3s ease;
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Open Sans', sans-serif;
-            --transition: all 0.3s ease;
+            --container-width: 1200px;
         }
 
-        /* --- Reset & Base Styles --- */
+        /* --- Global Reset & Base Styles --- */
         * {
             margin: 0;
             padding: 0;
@@ -33,12 +34,13 @@
             font-family: var(--font-body);
             color: var(--text-dark);
             line-height: 1.6;
-            background-color: #fdfdfd;
+            background-color: var(--white);
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
             font-family: var(--font-heading);
-            color: var(--dark-bg);
+            color: var(--dark-blue);
         }
 
         a {
@@ -50,18 +52,38 @@
             list-style: none;
         }
 
+        /* --- CSS Wavy Patterns --- */
+        .wavy-pattern {
+            position: relative;
+            background-color: var(--white);
+        }
+        .wavy-pattern::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, var(--white) 25%, transparent 25%) -50px 0,
+                        linear-gradient(225deg, var(--white) 25%, transparent 25%) -50px 0,
+                        linear-gradient(135deg, var(--light-gray) 25%, transparent 25%),
+                        linear-gradient(225deg, var(--light-gray) 25%, transparent 25%);
+            background-size: 100px 100px;
+            z-index: 1;
+        }
+
         /* --- Utility Classes --- */
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 20px;
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--text-light);
+            background-color: var(--primary-blue);
+            color: var(--white);
             padding: 14px 30px;
             border-radius: 5px;
             font-weight: 700;
@@ -74,19 +96,18 @@
         }
 
         .btn:hover {
-            background-color: var(--primary-hover);
+            background-color: #0c8fc0;
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4);
-            color: #fff;
         }
 
+        .section-padding { padding: 100px 0; }
         .text-center { text-align: center; }
-        .section-padding { padding: 80px 0; }
 
         /* --- Header & Navigation --- */
         header {
-            background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            background-color: var(--white);
+            border-bottom: 2px solid var(--light-gray);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -96,268 +117,208 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 90px;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
-            color: var(--primary-color);
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .phone-link {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-blue);
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
-        .logo span {
-            color: var(--dark-bg);
-        }
+        .phone-link:hover { color: var(--primary-blue); }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
 
         .nav-links a {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 16px;
+            color: var(--text-dark);
             transition: var(--transition);
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: var(--primary-blue);
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section (No Photo, Textured) --- */
         .hero {
-            /* Using a highly specific placeholder for power washing */
-            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), url('https://loremflickr.com/1920/1080/powerwashing,water') center/cover no-repeat;
-            height: 80vh;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            position: relative;
+            padding: 120px 0;
             text-align: center;
-            color: var(--text-light);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 25%, transparent 25%) -50px 0,
+                        linear-gradient(225deg, rgba(14, 165, 233, 0.1) 25%, transparent 25%) -50px 0,
+                        linear-gradient(135deg, rgba(34, 211, 238, 0.1) 25%, transparent 25%),
+                        linear-gradient(225deg, rgba(34, 211, 238, 0.1) 25%, transparent 25%);
+            background-size: 100px 100px;
+            opacity: 0.2;
         }
 
         .hero h1 {
-            color: var(--text-light);
-            font-size: 52px;
+            font-size: 56px;
+            color: var(--white);
             margin-bottom: 20px;
-            line-height: 1.2;
+            line-height: 1.1;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .hero p {
-            font-size: 20px;
-            margin-bottom: 35px;
-            max-width: 750px;
+            font-size: 22px;
+            margin-bottom: 40px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            color: #e2e8f0;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--text-light);
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background: var(--text-light);
-            color: var(--dark-bg);
-            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
         }
 
         /* --- Services Section --- */
-        .services {
-            background-color: #ffffff;
-        }
-
-        .section-title {
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 38px;
-            color: var(--dark-bg);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        
-        .section-title h2 span {
-            color: var(--primary-color);
-        }
-
-        .section-title p {
-            color: var(--text-dark);
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
 
         .service-card {
-            background: var(--secondary-color);
-            padding: 40px 30px;
+            background: var(--light-gray);
+            padding: 50px 30px;
             border-radius: 8px;
             text-align: center;
             transition: var(--transition);
-            border-bottom: 4px solid transparent;
+            border: 2px solid var(--light-gray);
         }
 
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: var(--primary-blue);
         }
 
         .service-icon {
-            font-size: 45px;
-            margin-bottom: 20px;
+            font-size: 50px;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
         }
 
         .service-card h3 {
             margin-bottom: 15px;
-            font-size: 22px;
+            font-size: 24px;
+            color: var(--dark-blue);
         }
 
-        /* --- Before & After Gallery Section --- */
-        .gallery-section {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-        }
-        
-        .gallery-section .section-title h2 {
-            color: var(--text-light);
-        }
-
-        .gallery-section .section-title p {
-            color: #94a3b8;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
+        /* --- Areas Served Section (Wavy Pattern) --- */
+        .areas {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
             position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-label {
+        .areas::after {
+            content: '';
             position: absolute;
-            bottom: 15px;
-            left: 15px;
-            background: var(--primary-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        /* --- About Section --- */
-        .about {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .about-content {
-            flex: 1;
-        }
-
-        .about-content h2 {
-            font-size: 38px;
-            margin-bottom: 20px;
-            color: var(--dark-bg);
-            text-transform: uppercase;
-        }
-
-        .about-content p {
-            margin-bottom: 20px;
-            font-size: 17px;
-        }
-
-        .about-image {
-            flex: 1;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            position: relative;
-        }
-
-        .about-image img {
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100px;
+            background: linear-gradient(135deg, var(--light-gray) 25%, transparent 25%) -50px 0,
+                        linear-gradient(225deg, var(--light-gray) 25%, transparent 25%) -50px 0,
+                        linear-gradient(135deg, var(--white) 25%, transparent 25%),
+                        linear-gradient(225deg, var(--white) 25%, transparent 25%);
+            background-size: 100px 100px;
         }
 
-        /* --- CTA Section --- */
-        .cta {
-            background-color: var(--primary-color);
-            color: var(--text-light);
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             text-align: center;
         }
-
-        .cta h2 {
-            color: var(--text-light);
-            font-size: 40px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+        .area-item {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--dark-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
         }
 
-        .cta p {
-            font-size: 22px;
-            margin-bottom: 35px;
+        /* --- Why Choose Us Section --- */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 4px;
+        }
+        .benefit-icon {
+            color: var(--primary-blue);
+            font-size: 24px;
+            margin-top: 3px;
+        }
+
+        /* --- Contact Section & Form --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .contact-info {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 8px;
+        }
+        .contact-info h3 { margin-bottom: 20px; font-size: 24px; }
+        .contact-info p { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        .cta .btn {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            font-size: 18px;
-            padding: 16px 40px;
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
-        
-        .cta .btn:hover {
-            background-color: #000;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            font-family: var(--font-body);
         }
+        .contact-form textarea { grid-column: span 2; height: 150px; resize: none; }
+        .contact-form .btn { grid-column: span 2; }
 
         /* --- Footer --- */
         footer {
-            background-color: var(--dark-bg);
+            background-color: var(--dark-blue);
             color: #94a3b8;
-            padding: 70px 0 20px;
+            padding: 80px 0 30px;
         }
 
         .footer-grid {
@@ -368,42 +329,26 @@
         }
 
         .footer-col h3 {
-            color: var(--text-light);
+            color: var(--white);
             margin-bottom: 20px;
             font-size: 22px;
         }
 
-        .footer-col p {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid #334155;
             font-size: 14px;
         }
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; 
-            }
-            .hero h1 {
-                font-size: 38px;
-            }
-            .about {
-                flex-direction: column;
-            }
-            .hero-buttons {
-                flex-direction: column;
-            }
-            .gallery-item img {
-                height: 250px;
-            }
+            .nav-links, .phone-link { display: none; }
+            .hero h1 { font-size: 38px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-form { grid-template-columns: 1fr; }
+            .contact-form textarea { grid-column: span 1; }
+            .contact-form .btn { grid-column: span 1; }
         }
     </style>
 </head>
@@ -411,138 +356,169 @@
 
     <header>
         <div class="container nav-container">
-            <a href="#" class="logo">
-                💧 Pressure Wash <span>Pros</span>
-            </a>
+            <a href="#" class="logo">Pressure Wash Pros</a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#gallery">Recent Work</a></li>
-                <li><a href="#about">About Us</a></li>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#areas">AREAS SERVED</a></li>
+                <li><a href="#contact">GET QUOTE</a></li>
             </ul>
-            <a href="tel:9728975835" class="btn">Call (972) 897-5835</a>
+            <a href="tel:9728975835" class="phone-link">
+                📞 (972) 897-5835
+            </a>
         </div>
     </header>
 
     <section id="home" class="hero">
         <div class="container">
-            <h1>Blast Away Years of Grime</h1>
-            <p>High-powered, professional exterior cleaning for Keller, Colleyville, and surrounding areas. Restore your property's curb appeal today.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn">Get a Free Quote</a>
-                <a href="#gallery" class="btn btn-outline">See Our Work</a>
-            </div>
+            <h1>Keller & Colleyville's Trusted Pressure Wash Pros</h1>
+            <p>Blast Away Grime, Restore Curb Appeal. Professional, High-Power Cleaning for Your Home & Business. Servicing Tarrant County.</p>
+            <a href="#contact" class="btn">GET A FREE QUOTE</a>
         </div>
     </section>
 
-    <section id="services" class="services section-padding">
+    <section id="services" class="section-padding wavy-pattern">
         <div class="container">
-            <div class="section-title text-center">
-                <h2>Our <span>Services</span></h2>
-                <p>We use commercial-grade pressure washers and soft-wash systems to deliver flawless results without damaging your property.</p>
+            <div class="section-title text-center" style="margin-bottom: 60px;">
+                <h2 style="font-size: 40px; text-transform: uppercase;">Professional Cleaning Services</h2>
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🏠</div>
-                    <h3>House Washing</h3>
-                    <p>Gentle soft-washing to remove green algae, mildew, and dirt from vinyl, brick, stucco, and hardie plank siding safely.</p>
+                    <div class="service-icon">🛣️</div>
+                    <h3>DRIVEWAY CLEANING</h3>
+                    <p>Remove Oil Stains, Mold, & Grime. Restore Concrete to a Like-New Appearance.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🛣️</div>
-                    <h3>Driveway & Concrete</h3>
-                    <p>High-pressure surface cleaners blast away tough oil stains, tire marks, and built-up grime from driveways and patios.</p>
+                    <div class="service-icon">🏠</div>
+                    <h3>HOUSE WASHING</h3>
+                    <p>Gentle Soft-Washing. Safe for All Siding: Vinyl, Brick, Stucco, & More.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">☂️</div>
+                    <h3>ROOF CLEANING</h3>
+                    <p>Safe Removal of Dark Algae Streaks. Extend the Life of Your Roof.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🪵</div>
-                    <h3>Deck & Fence</h3>
-                    <p>Careful pressure washing to strip away old weathering, gray algae, and dirt from wood or composite decking and fencing.</p>
+                    <h3>FENCE & DECK WASHING</h3>
+                    <p>Revitalize Your Outdoor Living Spaces. Restoration Cleaning for Wood & Composite.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🏢</div>
-                    <h3>Commercial Washing</h3>
-                    <p>Keep your storefront, dumpster pads, and building exteriors looking professional and welcoming for your customers.</p>
+                    <h3>COMMERCIAL WASHING</h3>
+                    <p>Storefronts, Parking Lots, Walkways. Make Your Business Shine.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="gallery-section section-padding">
+    <section id="areas" class="section-padding areas">
         <div class="container">
-            <div class="section-title text-center">
-                <h2>Proof is in the <span>Power Wash</span></h2>
-                <p>Don't just take our word for it. See the difference professional exterior cleaning makes.</p>
+            <div class="section-title text-center" style="margin-bottom: 60px;">
+                <h2 style="font-size: 40px; text-transform: uppercase;">Areas We Serve</h2>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://loremflickr.com/800/600/driveway,cleaning" alt="Driveway Pressure Washing">
-                    <div class="gallery-label">Concrete & Driveways</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://loremflickr.com/800/600/house,washing" alt="House Soft Washing">
-                    <div class="gallery-label">Siding Soft-Wash</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://loremflickr.com/800/600/deck,powerwashing" alt="Deck Cleaning">
-                    <div class="gallery-label">Deck Restoration</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="section-padding">
-        <div class="container about">
-            <div class="about-image">
-                <img src="https://loremflickr.com/800/1000/pressurewasher,worker" alt="Professional Pressure Washing Technician">
-            </div>
-            <div class="about-content">
-                <h2>Local Experts. <br>Professional Results.</h2>
-                <p>Based right here in Keller, TX, and proudly serving Colleyville and surrounding neighborhoods, Pressure Wash Pros is your trusted local partner for exterior cleaning. We know Texas weather takes a toll on your property, which is why we specialize in removing stubborn organic growth and deep-seated stains.</p>
-                <p>Our team is fully trained, insured, and equipped with the latest industrial-grade pressure washers and eco-friendly detergents. From a delicate roof soft-wash to heavy-duty concrete cleaning, we treat your property like our own.</p>
-                <ul style="margin-top: 25px; line-height: 2.2;">
-                    <li>✅ <strong>Commercial-Grade Equipment:</strong> We bring the power that DIY electric washers can't match.</li>
-                    <li>✅ <strong>Property Protection:</strong> We prep the area and protect your landscaping before we spray.</li>
-                    <li>✅ <strong>100% Satisfaction Guarantee:</strong> We don't pack up our hoses until the job is done right.</li>
-                    <li>✅ <strong>Upfront Pricing:</strong> Free estimates with absolutely no hidden fees.</li>
-                </ul>
+            <div class="areas-grid">
+                <div class="area-item">Colleyville</div>
+                <div class="area-item">Keller</div>
+                <div class="area-item">Southlake</div>
+                <div class="area-item">Grapevine</div>
+                <div class="area-item">Trophy Club</div>
+                <div class="area-item">Westlake</div>
+                <div class="area-item">North Richland Hills</div>
+                <div class="area-item">Roanoke</div>
+                <div class="area-item">Watauga</div>
+                <div class="area-item">Hurst</div>
+                <div class="area-item">Bedford</div>
+                <div class="area-item">Euless</div>
             </div>
         </div>
     </section>
 
-    <section class="cta section-padding">
+    <section id="why" class="section-padding wavy-pattern">
         <div class="container">
-            <h2>Ready to Make Your Property Look New Again?</h2>
-            <p>Get on our schedule today for a free, no-obligation estimate.</p>
-            <a href="tel:9728975835" class="btn">Call Now: (972) 897-5835</a>
+            <div class="section-title text-center" style="margin-bottom: 60px;">
+                <h2 style="font-size: 40px; text-transform: uppercase;">WHY CHOOSE US</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <h4 style="color: var(--dark-blue);">Locally Owned, Keller Base</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <h4 style="color: var(--dark-blue);">Served Colleyville & Tarrant County</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <h4 style="color: var(--dark-blue);">Fully Licensed & Insured</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <h4 style="color: var(--dark-blue);">Eco-Friendly Cleaning Solutions</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <h4 style="color: var(--dark-blue);">Modern, High-Power Equipment</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <h4 style="color: var(--dark-blue);">100% Satisfaction Guarantee</h4>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer id="contact">
+    <section id="contact" class="section-padding areas">
+        <div class="container contact-grid">
+            <div class="contact-info">
+                <h3>GET IN TOUCH</h3>
+                <p>📍 VISIT OUR LOCATION: 1823 Keller Pkwy, Keller, TX 76248</p>
+                <p>📞 CALL US NOW: (972) 897-5835</p>
+                <p>Feel free to reach out for any questions or to schedule your free estimate.</p>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <input type="text" placeholder="Service Needed (e.g., Driveway)" required>
+                <textarea placeholder="Message" required></textarea>
+                <button type="submit" class="btn">SUBMIT REQUEST</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>Pressure Wash Pros</h3>
-                    <p>Your trusted local partner for residential and commercial exterior cleaning. Blasting away the grime so your property can shine.</p>
+                    <p>Professional exterior cleaning for residential and commercial properties.</p>
+                    <p>Serving Tarrant County since 2018.</p>
                 </div>
                 <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <p>📍 1823 Keller Pkwy, Keller, TX 76248</p>
-                    <p>📞 (972) 897-5835</p>
-                    <p>✉️ quotes@pressurewashpros.com</p>
+                    <h3>Contact</h3>
+                    <p>1823 Keller Pkwy<br>Keller, TX 76248</p>
+                    <p>(972) 897-5835</p>
                 </div>
                 <div class="footer-col">
-                    <h3>Areas Served</h3>
-                    <p>Proudly serving residential and commercial clients in:</p>
-                    <ul style="margin-top: 10px; line-height: 1.8;">
-                        <li>• Colleyville</li>
-                        <li>• Keller</li>
-                        <li>• Southlake</li>
-                        <li>• Grapevine</li>
-                        <li>• Tarrant County</li>
-                    </ul>
+                    <h3>Services</h3>
+                    <p>Driveways, House Siding, Roofs, Decks, Commercial Spaces.</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Pressure Wash Pros. All Rights Reserved.</p>
+                <p>Copyright ©2026 Pressure Wash Pros, Inc. All rights reserved.</p>
             </div>
         </div>
     </footer>
